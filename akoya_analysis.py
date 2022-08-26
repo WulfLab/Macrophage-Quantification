@@ -11,7 +11,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 from scipy import stats
 
-directory = '/users/stevenvandal/Downloads/JanHeng_Rept1_SummarizedData/'
+directory = 'example/directory'  # set this to the directory containing the files
 ctrl_files = ['Lin_Ctrl1_Scan1_CD4CD8only.csv', 'Lin_PosCtrlv2_Scan1_CD4CD8only.csv', 'Lin_Ctrl5_Scan1_CD4CD8only.csv']
 ola_files = ['Lin_Ola1_Scan1_CD4CD8only.csv', 'Lin_Ola2_Scan1_CD4CD8only.csv', 'Lin_Ola3_Scan1_CD4CD8only.csv']
 ola_cd47_files = ['Lin_OlaCD47_1_Scan1_CD4CD8only.csv', 'Lin_OlaCD47_2_Scan1_CD4CD8only.csv', 'Lin_OlaCD47_3_Scan1_CD4CD8only.csv']
@@ -73,7 +73,7 @@ plt.title('IFN in CD4 Cells')
 plt.xlim([1, 35])
 plt.ylim([0, 1200])
 plt.legend()
-# fig.savefig('/users/stevenvandal/Desktop/IFN in CD4 Cells (IFN > 1).png', dpi=300)
+# fig.savefig(directory + '/IFN in CD4 Cells (IFN > 1).png', dpi=300)
 
 # CD8 IFN-positive histograms
 cd8_ifn_ctrl_counts, cd8_ifn_ctrl_bins = get_histogram(lists_ifn_pos_cells, 'Control', 'CD8+', 'IFN', nbins)
@@ -92,7 +92,7 @@ plt.title('IFN in CD8 Cells')
 plt.xlim([1, 30])
 plt.ylim([0, 200])
 plt.legend()
-# fig.savefig('/users/stevenvandal/Desktop/IFN in CD8 Cells (IFN > 1).png', dpi=300)
+# fig.savefig(directory + '/IFN in CD8 Cells (IFN > 1).png', dpi=300)
 
 # CD4 GZB-positive histograms
 cd4_gzb_ctrl_counts, cd4_gzb_ctrl_bins = get_histogram(lists_gzb_pos_cells, 'Control', 'CD4+', 'GZB', nbins)
@@ -111,7 +111,7 @@ plt.title('GZB in CD4 Cells')
 plt.xlim([1, 35])
 plt.ylim([0, 1200])
 plt.legend()
-# fig.savefig('/users/stevenvandal/Desktop/GZB in CD4 Cells (GZB > 1).png', dpi=300)
+# fig.savefig(directory + '/GZB in CD4 Cells (GZB > 1).png', dpi=300)
 
 # CD8 GZB-positive histograms
 cd8_gzb_ctrl_counts, cd8_gzb_ctrl_bins = get_histogram(lists_gzb_pos_cells, 'Control', 'CD8+', 'GZB', nbins)
@@ -130,7 +130,7 @@ plt.title('GZB in CD8 Cells')
 plt.xlim([1, 30])
 plt.ylim([0, 200])
 plt.legend()
-# fig.savefig('/users/stevenvandal/Desktop/GZB in CD8 Cells (IFN > 1).png', dpi=300)
+# fig.savefig(directory + '/GZB in CD8 Cells (IFN > 1).png', dpi=300)
 
 # CUMULATIVE DISTRIBUTION PLOTS
 
@@ -151,7 +151,7 @@ plt.title('IFN in CD4 Cells')
 plt.xlim([1, 35])
 plt.ylim([0, 1])
 plt.legend()
-fig.savefig('/users/stevenvandal/Desktop/IFN in CD4 Cells (IFN > 1) cumulative.png', dpi=300)
+fig.savefig(directory + '/IFN in CD4 Cells (IFN > 1) cumulative.png', dpi=300)
 
 # IFN positive CD8 cells
 ifn_cd8_ctrl = lists_ifn_pos_cells.loc[(lists_ifn_pos_cells['Treatment'] == 'Control') & (lists_ifn_pos_cells['Phenotype'] == 'CD8+')].reset_index()['IFN'][0]
@@ -170,7 +170,7 @@ plt.title('IFN in CD8 Cells')
 plt.xlim([1, 30])
 plt.ylim([0, 1])
 plt.legend()
-fig.savefig('/users/stevenvandal/Desktop/IFN in CD8 Cells (IFN > 1) cumulative.png', dpi=300)
+fig.savefig(directory + '/IFN in CD8 Cells (IFN > 1) cumulative.png', dpi=300)
 
 # GZB positive CD4 cells
 gzb_cd4_ctrl = lists_gzb_pos_cells.loc[(lists_gzb_pos_cells['Treatment'] == 'Control') & (lists_gzb_pos_cells['Phenotype'] == 'CD4+')].reset_index()['GZB'][0]
@@ -189,7 +189,7 @@ plt.title('GZB in CD4 Cells')
 plt.xlim([1, 35])
 plt.ylim([0, 1])
 plt.legend()
-fig.savefig('/users/stevenvandal/Desktop/GZB in CD4 Cells (GZB > 1) cumulative.png', dpi=300)
+fig.savefig(directory + '/GZB in CD4 Cells (GZB > 1) cumulative.png', dpi=300)
 
 # GZB positive CD8 cells
 gzb_cd8_ctrl = lists_gzb_pos_cells.loc[(lists_gzb_pos_cells['Treatment'] == 'Control') & (lists_gzb_pos_cells['Phenotype'] == 'CD8+')].reset_index()['GZB'][0]
@@ -208,7 +208,7 @@ plt.title('GZB in CD8 Cells')
 plt.xlim([1, 30])
 plt.ylim([0, 1])
 plt.legend()
-fig.savefig('/users/stevenvandal/Desktop/GZB in CD8 Cells (GZB > 1) cumulative.png', dpi=300)
+fig.savefig(directory + '/GZB in CD8 Cells (GZB > 1) cumulative.png', dpi=300)
 
 # Perform the Kolmogorov-Smirnov tests
 test_results = pd.DataFrame(columns=['Signal', 'Phenotype', 'Treatment', 'KS statistic', 'p-value'])
@@ -241,6 +241,6 @@ gzb_cd8_mna_cd47_statistic, gzb_cd8_mna_cd47_pvalue = stats.ks_2samp(gzb_cd8_ctr
 test_results.loc[len(test_results.index)] = ['GZB', 'CD8', 'MNA + CD87 vs. Control', gzb_cd8_mna_cd47_statistic, gzb_cd8_mna_cd47_pvalue]
 
 # Save the data files
-# mean_intensities_data.to_csv('/users/stevenvandal/Desktop/mean intensities (IFN and GZB > 1).csv')
-# count_data.to_csv('/users/stevenvandal/Desktop/cell counts.csv')
-test_results.to_csv('/users/stevenvandal/Desktop/test results.csv')
+# mean_intensities_data.to_csv(directory + '/mean intensities (IFN and GZB > 1).csv')
+# count_data.to_csv(directory + '/cell counts.csv')
+test_results.to_csv(directory + '/test results.csv')
